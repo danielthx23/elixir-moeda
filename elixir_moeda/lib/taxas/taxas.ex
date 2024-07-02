@@ -67,36 +67,10 @@ defmodule ElixirMoeda.Taxas do
     :ZMW => %{taxa: 0.049206, simbolo: "ZK", casas_decimais: 2}
   }
 
-  @doc ~S"""
-  Retorna o mapa completo de taxas de câmbio.
-
-  ## Retorna
-
-  Retorna o mapa @taxas_cambio.
-  """
   def get_taxas_cambio() do
     @taxas_cambio
   end
 
-  @doc ~S"""
-  Obtém os detalhes completos de uma moeda a partir do mapa de taxas de câmbio.
-
-  ## Parâmetros
-
-  * `moeda`: Código da moeda desejada para consulta.
-
-  ## Retorna
-
-  Retorna a estrutura completa da moeda se encontrada no mapa, ou `nil` caso contrário.
-
-  ## Exemplo
-
-        iex> Moeda.Taxas.get_moeda(:USD)
-        %{taxa: 1.0, simbolo: "$", casas_decimais: 2}
-
-        iex> Moeda.Taxas.get_moeda("XYZ")
-        nil
-  """
   def get_moeda(moeda) do
     case Map.get(@taxas_cambio, moeda) do
       nil -> nil
@@ -104,25 +78,6 @@ defmodule ElixirMoeda.Taxas do
     end
   end
 
-  @doc ~S"""
-  Obtém a taxa de câmbio de uma moeda específica a partir do mapa de taxas de câmbio.
-
-  ## Parâmetros
-
-  * `moeda`: Código da moeda desejada para consulta.
-
-  ## Retorna
-
-  Retorna a taxa de câmbio da moeda se encontrada no mapa, ou `nil` caso contrário.
-
-  ## Exemplo
-
-        iex> Moeda.Taxas.get_taxa(:USD)
-        1.0
-
-        iex> Moeda.Taxas.get_taxa(:XYZ)
-        nil
-  """
   def get_taxa(moeda) do
     case get_moeda(moeda) do
       nil -> nil
@@ -130,25 +85,6 @@ defmodule ElixirMoeda.Taxas do
     end
   end
 
-  @doc ~S"""
-  Obtém o símbolo de uma moeda específica a partir do mapa de taxas de câmbio.
-
-  ## Parâmetros
-
-  * `moeda`: Código da moeda desejada para consulta.
-
-  ## Retorna
-
-  Retorna o símbolo da moeda se encontrado no mapa, ou `nil` caso contrário.
-
-  ## Exemplo
-
-        iex> Moeda.Taxas.get_simbolo(:USD)
-        "$"
-
-        iex> Moeda.Taxas.get_simbolo(:XYZ)
-        nil
-  """
   def get_simbolo(moeda) do
     case get_moeda(moeda) do
       nil -> nil
@@ -156,25 +92,6 @@ defmodule ElixirMoeda.Taxas do
     end
   end
 
-  @doc ~S"""
-  Obtém o número de casas decimais de uma moeda específica a partir do mapa de taxas de câmbio.
-
-  ## Parâmetros
-
-  * `moeda`: Código da moeda desejada para consulta.
-
-  ## Retorna
-
-  Retorna o número de casas decimais da moeda se encontrado no mapa, ou `nil` caso contrário.
-
-  ## Exemplo
-
-        iex> Moeda.Taxas.get_casas(:USD)
-        2
-
-        iex> Moeda.Taxas.get_casas(:XYZ)
-        nil
-  """
   def get_casas(moeda) do
     case get_moeda(moeda) do
       nil -> nil
