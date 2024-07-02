@@ -13,4 +13,14 @@ defmodule ElixirMoeda do
   Este aplicativo utiliza uma estrutura de dados abstrata para representar valores monetários em centavos e suas respectivas moedas.
   """
 
+  #Importa o mapping de taxas com alias do modulo
+  alias Moeda.Taxas
+
+  #Define a estrutura de dados (map) com o nome do modulo e define os valores padrões para centavos,
+  #código da moeda, simbolo da moeda e quantidade de casas decimais da moeda.
+
+  #Structs são simplesmente Maps com um campo "especial" chamado __struct__ que contém o nome da estrutura.
+  #Contudo, não herdam nenhum dos protocolos que os Maps herdam.
+  defstruct centavos: 0, codigo_moeda: "BRL", simbolo: "$", casas_decimais: 0
+
 end
