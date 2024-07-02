@@ -19,13 +19,13 @@ Para começar a usar o projeto, siga estas etapas:
 1. Clone este repositório para sua máquina local:
 
       ```
-      git clone https://github.com/danielthx23/moeda-elixir.git
+      git clone https://github.com/danielthx23/elixir-moeda.git
       ```
     
 2. Navegue até o diretório do projeto:
 
       ```
-      cd moeda-elixir
+      cd elixir_moeda
       ```
 
 3. Inicie os testes com o mix:
