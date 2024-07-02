@@ -1,6 +1,6 @@
 defmodule TaxasTeste do
   use ExUnit.Case
-  doctest Moeda.Taxas
+  doctest ElixirMoeda.Taxas
 
   test "retorna o map com as moedas" do
     expected_taxas = %{
@@ -64,6 +64,6 @@ defmodule TaxasTeste do
     :ZMW => %{taxa: 0.049206, simbolo: "ZK", casas_decimais: 2}
     }
 
-    assert expected_taxas == Moeda.Taxas.get_taxas_cambio()
+    assert expected_taxas == ElixirMoeda.Taxas.get_taxas_cambio()
   end
 end

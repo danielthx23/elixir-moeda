@@ -1,6 +1,6 @@
 defmodule ElixirMoeda do
   @moduledoc """
-  Documentação do módulo Moeda
+  Documentação do módulo ElixirMoeda
   Versão: 1.1.1
   Criado por Daniel Akiyama
   GitHub: https://github.com/danielthx23
@@ -9,12 +9,12 @@ defmodule ElixirMoeda do
   Desafio proposto pela Stone: https://gist.github.com/Isabelarrodrigues/873b8849e8b54f0968d77a4b2f111ec4
 
   Este módulo serve para reunir várias funções de operações financeiras.
-  Tanto as mais básicas, como subtrair e somar, quanto operações complexas como a de Split e de conversão de moedas.
-  Este aplicativo utiliza uma estrutura de dados abstrata para representar valores monetários em centavos e suas respectivas moedas.
+  Tanto as mais básicas, como subtrair e somar, quanto operações complexas como a de Split e de conversão de ElixirMoedas.
+  Este aplicativo utiliza uma estrutura de dados abstrata para representar valores monetários em centavos e suas respectivas ElixirMoedas.
   """
 
   # Importa o mapping de taxas com alias do modulo
-  alias Moeda.Taxas
+  alias ElixirMoeda.Taxas
 
   # Define a estrutura de dados (map) com o nome do modulo e define os valores padrões para centavos,
   # código da moeda, simbolo da moeda e quantidade de casas decimais da moeda.
@@ -24,71 +24,27 @@ defmodule ElixirMoeda do
   defstruct centavos: 0, codigo_moeda: "BRL", simbolo: "$", casas_decimais: 0
 
   @doc ~S"""
-  Cria uma nova instância de Moeda com os centavos e o código de moeda especificados, buscando os outros atributos
-  no mapping @taxas_cambio com o código de moeda.
+  Cria uma nova instância de ElixirMoeda com os centavos e o código de ElixirMoeda especificados, buscando os outros atributos
+  no mapping @taxas_cambio com o código da moeda.
 
   Retorna uma tupla contendo um átomo de resposta (:ok ou :error) e o resultado correspondente.
 
   ## Parâmetros
 
-  * `centavos`: O valor em centavos da nova instância de Moeda, deve ser um número inteiro positivo.
+  * `centavos`: O valor em centavos da nova instância de ElixirMoeda, deve ser um número inteiro positivo.
   * `codigo_moeda`: O código da moeda desejada para a nova instância, deve ser um átomo existente em @taxas_cambio.
 
   ## Retorna
 
-  Retorna `{:ok, moeda}` se a moeda existir em @taxas_cambio, onde `moeda` é uma estrutura %Moeda com os atributos preenchidos.
-  Retorna `{:error, message}` se o código de moeda não existir em @taxas_cambio.
+  Retorna `{:ok, ElixirMoeda}` se a moeda existir em @taxas_cambio, onde `ElixirMoeda` é uma estrutura %ElixirMoeda com os atributos preenchidos.
+  Retorna `{:error, message}` se o código de ElixirMoeda não existir em @taxas_cambio.
 
   ## Exemplo
 
-        iex> Moeda.novo(1000, :USD)
-        {:ok, %Moeda{centavos: 1000, codigo_moeda: :USD, simbolo: "$", casas_decimais: 2}}
+        iex> ElixirMoeda.novo(1000, :USD)
+        {:ok, %ElixirMoeda{centavos: 1000, codigo_moeda: :USD, simbolo: "$", casas_decimais: 2}}
 
-        iex> Moeda.novo(1000, :XYZ)
-        {:error, "Essa moeda não existe!"}
-
-  """
-  def novo(centavos, codigo_moeda)
-      when is_integer(centavos) and
-             centavos >= 0 and
-             is_atom(codigo_moeda) do
-    case Taxas.get_moeda(codigo_moeda) do
-      nil ->
-        {:error, "Essa moeda não existe!"}
-
-      %{simbolo: simbolo, casas_decimais: decimais} ->
-        {:ok,
-         %Moeda{
-           centavos: centavos,
-           codigo_moeda: codigo_moeda,
-           simbolo: simbolo,
-           casas_decimais: decimais
-         }}
-    end
-  end
-
-  @doc ~S"""
-  Cria uma nova instância de Moeda com os centavos e o código de moeda especificados, buscando os outros atributos
-  no mapping @taxas_cambio com o código de moeda.
-
-  Retorna uma tupla contendo um átomo de resposta (:ok ou :error) e o resultado correspondente.
-
-  ## Parâmetros
-
-  * `centavos`: O valor em centavos da nova instância de Moeda, deve ser um número inteiro positivo.
-  * `codigo_moeda`: O código da moeda desejada para a nova instância, deve ser um átomo existente em @taxas_cambio.
-
-  ## Retorna
-
-  Retorna `{:ok, moeda}` se a moeda existir em @taxas_cambio, onde `moeda` é uma estrutura %Moeda com os atributos preenchidos.
-  Retorna `{:error, message}` se o código de moeda não existir em @taxas_cambio.
-
-  ## Exemplo
-
-        iex> Moeda.novo(1000, :USD)
-        {:ok, %Moeda{centavos: 1000, codigo_moeda: :USD, simbolo: "$", casas_decimais: 2}}
-
-        iex> Moeda.novo(1000, :XYZ)
+        iex> ElixirMoeda.novo(1000, :XYZ)
         {:error, "Essa moeda não existe!"}
 
   """
@@ -102,7 +58,7 @@ defmodule ElixirMoeda do
 
       %{simbolo: simbolo, casas_decimais: decimais} ->
         {:ok,
-        %Moeda{
+        %ElixirMoeda{
           centavos: centavos,
           codigo_moeda: codigo_moeda,
           simbolo: simbolo,
@@ -112,30 +68,74 @@ defmodule ElixirMoeda do
   end
 
   @doc ~S"""
-  Cria uma nova instância de Moeda com os centavos e o código de moeda especificados, buscando os outros atributos
-  no mapping @taxas_cambio com o código de moeda.
+  Cria uma nova instância de ElixirMoeda com os centavos e o código de ElixirMoeda especificados, buscando os outros atributos
+  no mapping @taxas_cambio com o código de ElixirMoeda.
+
+  Retorna uma tupla contendo um átomo de resposta (:ok ou :error) e o resultado correspondente.
+
+  ## Parâmetros
+
+  * `centavos`: O valor em centavos da nova instância de ElixirMoeda, deve ser um número inteiro positivo.
+  * `codigo_moeda`: O código da ElixirMoeda desejada para a nova instância, deve ser um átomo existente em @taxas_cambio.
+
+  ## Retorna
+
+  Retorna `{:ok, ElixirMoeda}` se a ElixirMoeda existir em @taxas_cambio, onde `ElixirMoeda` é uma estrutura %ElixirMoeda com os atributos preenchidos.
+  Retorna `{:error, message}` se o código de ElixirMoeda não existir em @taxas_cambio.
+
+  ## Exemplo
+
+        iex> ElixirMoeda.novo(1000, :USD)
+        {:ok, %ElixirMoeda{centavos: 1000, codigo_moeda: :USD, simbolo: "$", casas_decimais: 2}}
+
+        iex> ElixirMoeda.novo(1000, :XYZ)
+        {:error, "Essa moeda não existe!"}
+
+  """
+  def novo(centavos, codigo_moeda)
+      when is_integer(centavos) and
+            centavos >= 0 and
+            is_atom(codigo_moeda) do
+    case Taxas.get_moeda(codigo_moeda) do
+      nil ->
+        {:error, "Essa moeda não existe!"}
+
+      %{simbolo: simbolo, casas_decimais: decimais} ->
+        {:ok,
+        %ElixirMoeda{
+          centavos: centavos,
+          codigo_moeda: codigo_moeda,
+          simbolo: simbolo,
+          casas_decimais: decimais
+        }}
+    end
+  end
+
+  @doc ~S"""
+  Cria uma nova instância de ElixirMoeda com os centavos e o código de ElixirMoeda especificados, buscando os outros atributos
+  no mapping @taxas_cambio com o código de ElixirMoeda.
 
   Apenas retorna o resultado.
 
   ## Parâmetros
 
-  * `centavos`: O valor em centavos da nova instância de Moeda, deve ser um número inteiro positivo.
-  * `codigo_moeda`: O código da moeda desejada para a nova instância, deve ser um átomo existente em @taxas_cambio.
+  * `centavos`: O valor em centavos da nova instância de ElixirMoeda, deve ser um número inteiro positivo.
+  * `codigo_moeda`: O código da ElixirMoeda desejada para a nova instância, deve ser um átomo existente em @taxas_cambio.
 
   ## Retorna
 
-  Retorna uma estrutura %Moeda preenchida com os atributos correspondentes ao código de moeda fornecido.
+  Retorna uma estrutura %ElixirMoeda preenchida com os atributos correspondentes ao código de ElixirMoeda fornecido.
 
   ## Exemplo
 
-      iex> Moeda.novo!(1000, :USD)
-      %Moeda{centavos: 1000, codigo_moeda: :USD, simbolo: "$", casas_decimais: 2}
+      iex> ElixirMoeda.novo!(1000, :USD)
+      %ElixirMoeda{centavos: 1000, codigo_moeda: :USD, simbolo: "$", casas_decimais: 2}
 
   """
   def novo!(centavos, codigo_moeda) do
     case Taxas.get_moeda(codigo_moeda) do
       %{simbolo: simbolo, casas_decimais: decimais} ->
-        %Moeda{
+        %ElixirMoeda{
           centavos: centavos,
           codigo_moeda: codigo_moeda,
           simbolo: simbolo,
@@ -145,25 +145,25 @@ defmodule ElixirMoeda do
   end
 
   @doc ~S"""
-  Converte um valor de Moeda para outra moeda com base nas taxas de câmbio definidas.
+  Converte um valor de ElixirMoeda para outra ElixirMoeda com base nas taxas de câmbio definidas.
 
   ## Parâmetros
 
-  * `%Moeda{...}`: O struct com código da moeda de origem e valor em centavos, representado como uma estrutura `%Moeda{}`.
-  * `destino`: O código da moeda para a qual o `valor` será convertido.
+  * `%ElixirMoeda{...}`: O struct com código da ElixirMoeda de origem e valor em centavos, representado como uma estrutura `%ElixirMoeda{}`.
+  * `destino`: O código da ElixirMoeda para a qual o `valor` será convertido.
 
   ## Retorna
 
-  Retorna uma nova estrutura `%Moeda{}` com o valor convertido para a `novo_codigo_moeda`, aplicando as taxas de câmbio definidas em `@taxas_cambio`.
+  Retorna uma nova estrutura `%ElixirMoeda{}` com o valor convertido para a `novo_codigo_moeda`, aplicando as taxas de câmbio definidas em `@taxas_cambio`.
 
   ## Exemplo
 
-      iex> valor = Moeda.novo!(1000, :USD)
-      iex> Moeda.converte(valor, :EUR)
-      {:ok, %Moeda{centavos: 931, codigo_moeda: :EUR, simbolo: "€", casas_decimais: 2}}
+      iex> valor = ElixirMoeda.novo!(1000, :USD)
+      iex> ElixirMoeda.converte(valor, :EUR)
+      {:ok, %ElixirMoeda{centavos: 931, codigo_moeda: :EUR, simbolo: "€", casas_decimais: 2}}
 
   """
-  def converte(%Moeda{centavos: centavos, codigo_moeda: origem}, destino)
+  def converte(%ElixirMoeda{centavos: centavos, codigo_moeda: origem}, destino)
       when is_atom(destino) do
     case {Taxas.get_moeda(origem), Taxas.get_moeda(destino)} do
       {nil, _} ->
@@ -177,7 +177,7 @@ defmodule ElixirMoeda do
         novo_centavos = round(centavos * (taxa_origem / taxa_destino))
 
         {:ok,
-        %Moeda{
+        %ElixirMoeda{
           centavos: novo_centavos,
           codigo_moeda: destino,
           simbolo: simbolo_destino,
@@ -187,98 +187,98 @@ defmodule ElixirMoeda do
   end
 
   @doc ~S"""
-  Formata um valor de Moeda como uma string de saída formatada com o símbolo, valor formatado e código da moeda.
+  Formata um valor de ElixirMoeda como uma string de saída formatada com o símbolo, valor formatado e código da ElixirMoeda.
 
   ## Parâmetros
 
-  * `%Moeda{...}`: Estrutura %Moeda contendo as informações do valor monetário a ser formatado.
+  * `%ElixirMoeda{...}`: Estrutura %ElixirMoeda contendo as informações do valor monetário a ser formatado.
 
   ## Retorna
 
-  Retorna `{:ok, string_formatada}` contendo a representação formatada da moeda, ou `{:error, reason}` se houver um erro.
+  Retorna `{:ok, string_formatada}` contendo a representação formatada da ElixirMoeda, ou `{:error, reason}` se houver um erro.
 
   ## Exemplo
 
-      iex> Moeda.formatar_para_string(Moeda.novo!(1000, :USD))
+      iex> ElixirMoeda.formatar_para_string(ElixirMoeda.novo!(1000, :USD))
       {:ok, "$ 10.0 USD"}
 
   """
-  def formatar_para_string(%Moeda{
+  def formatar_para_string(%ElixirMoeda{
         centavos: centavos,
         codigo_moeda: moeda,
         simbolo: simbolo,
         casas_decimais: casas
       }) do
     {:ok,
-    "#{simbolo} #{formatar_para_float(%Moeda{centavos: centavos, casas_decimais: casas})} #{moeda}"}
+    "#{simbolo} #{formatar_para_float(%ElixirMoeda{centavos: centavos, casas_decimais: casas})} #{moeda}"}
   end
 
-  defp formatar_para_float(%Moeda{centavos: centavos, casas_decimais: casas_decimais}) do
+  defp formatar_para_float(%ElixirMoeda{centavos: centavos, casas_decimais: casas_decimais}) do
     Float.round(centavos / 100.0, casas_decimais)
     |> Float.to_string()
   end
 
   @doc ~S"""
-  Soma dois valores de Moeda se eles tiverem a mesma moeda.
+  Soma dois valores de ElixirMoeda se eles tiverem a mesma ElixirMoeda.
 
   ## Parâmetros
 
-  * `moeda1`: Estrutura %Moeda contendo os valores a serem somados.
-  * `moeda2`: Estrutura %Moeda contendo os valores a serem somados.
+  * `moeda1`: Estrutura %ElixirMoeda contendo os valores a serem somados.
+  * `moeda2`: Estrutura %ElixirMoeda contendo os valores a serem somados.
 
   ## Retorna
 
-  Retorna `{:ok, %Moeda{centavos: resultado}}` se as moedas forem iguais.
-  Retorna `{:error, mensagem_de_erro}` se as moedas forem diferentes.
+  Retorna `{:ok, %ElixirMoeda{centavos: resultado}}` se as ElixirMoedas forem iguais.
+  Retorna `{:error, mensagem_de_erro}` se as ElixirMoedas forem diferentes.
 
   ## Exemplos
 
-      iex> Moeda.somar(Moeda.novo!(1000, :USD), Moeda.novo!(500, :USD))
-      {:ok, %Moeda{casas_decimais: 2, centavos: 1500, codigo_moeda: :USD, simbolo: "$"}}
+      iex> ElixirMoeda.somar(ElixirMoeda.novo!(1000, :USD), ElixirMoeda.novo!(500, :USD))
+      {:ok, %ElixirMoeda{casas_decimais: 2, centavos: 1500, codigo_moeda: :USD, simbolo: "$"}}
 
-      iex> Moeda.somar(Moeda.novo!(1000, :USD), Moeda.novo!(500, :EUR))
-      {:error, "Os dois valores são de moedas diferentes! USD != EUR"}
+      iex> ElixirMoeda.somar(ElixirMoeda.novo!(1000, :USD), ElixirMoeda.novo!(500, :EUR))
+      {:error, "Os dois valores são de ElixirMoedas diferentes! USD != EUR"}
 
   """
   def somar(
-        %Moeda{centavos: centavos1, codigo_moeda: moeda1},
-        %Moeda{centavos: centavos2, codigo_moeda: moeda2}
+        %ElixirMoeda{centavos: centavos1, codigo_moeda: moeda1},
+        %ElixirMoeda{centavos: centavos2, codigo_moeda: moeda2}
       ) do
     case moeda1 == moeda2 do
-      true -> Moeda.novo(centavos1 + centavos2, moeda1)
-      false -> {:error, "Os dois valores são de moedas diferentes! #{moeda1} != #{moeda2}"}
+      true -> ElixirMoeda.novo(centavos1 + centavos2, moeda1)
+      false -> {:error, "Os dois valores são de ElixirMoedas diferentes! #{moeda1} != #{moeda2}"}
     end
   end
 
   @doc ~S"""
-  Subtrai dois valores de Moeda se eles tiverem a mesma moeda.
+  Subtrai dois valores de ElixirMoeda se eles tiverem a mesma ElixirMoeda.
 
   ## Parâmetros
 
-  * `moeda1`: Estrutura %Moeda contendo os valores a serem subtraídos.
-  * `moeda2`: Estrutura %Moeda contendo os valores a serem subtraídos.
+  * `moeda1`: Estrutura %ElixirMoeda contendo os valores a serem subtraídos.
+  * `moeda2`: Estrutura %ElixirMoeda contendo os valores a serem subtraídos.
 
   ## Retorna
 
-  Retorna `{:ok, %Moeda{centavos: resultado}}` se as moedas forem iguais.
-  Retorna `{:error, mensagem_de_erro}` se as moedas forem diferentes.
+  Retorna `{:ok, %ElixirMoeda{centavos: resultado}}` se as ElixirMoedas forem iguais.
+  Retorna `{:error, mensagem_de_erro}` se as ElixirMoedas forem diferentes.
 
   ## Exemplos
 
-      iex> Moeda.subtrair(Moeda.novo!(1000, :USD), Moeda.novo!(500, :USD))
-      {:ok, %Moeda{casas_decimais: 2, centavos: 500, codigo_moeda: :USD, simbolo: "$"}}
+      iex> ElixirMoeda.subtrair(ElixirMoeda.novo!(1000, :USD), ElixirMoeda.novo!(500, :USD))
+      {:ok, %ElixirMoeda{casas_decimais: 2, centavos: 500, codigo_moeda: :USD, simbolo: "$"}}
 
-      iex> Moeda.subtrair(Moeda.novo!(1000, :USD), Moeda.novo!(500, :EUR))
-      {:error, "Os dois valores são de moedas diferentes! USD != EUR"}
+      iex> ElixirMoeda.subtrair(ElixirMoeda.novo!(1000, :USD), ElixirMoeda.novo!(500, :EUR))
+      {:error, "Os dois valores são de ElixirMoedas diferentes! USD != EUR"}
 
   """
   def subtrair(
-        %Moeda{centavos: centavos1, codigo_moeda: moeda1},
-        %Moeda{centavos: centavos2, codigo_moeda: moeda2}
+        %ElixirMoeda{centavos: centavos1, codigo_moeda: moeda1},
+        %ElixirMoeda{centavos: centavos2, codigo_moeda: moeda2}
       ) do
     case moeda1 == moeda2 do
-      true -> Moeda.novo(centavos1 - centavos2, moeda1)
-      false -> {:error, "Os dois valores são de moedas diferentes! #{moeda1} != #{moeda2}"}
+      true -> ElixirMoeda.novo(centavos1 - centavos2, moeda1)
+      false -> {:error, "Os dois valores são de ElixirMoedas diferentes! #{moeda1} != #{moeda2}"}
     end
   end
 
@@ -292,34 +292,34 @@ defmodule ElixirMoeda do
 
   ## Retorna
 
-  Retorna `{:ok, [parte1, parte2, ...]}` onde cada parte é uma estrutura %Moeda representando a divisão do valor.
+  Retorna `{:ok, [parte1, parte2, ...]}` onde cada parte é uma estrutura %ElixirMoeda representando a divisão do valor.
 
   ## Exemplos
 
-      iex> Moeda.split(Moeda.novo!(1000, :USD), 3)
+      iex> ElixirMoeda.split(ElixirMoeda.novo!(1000, :USD), 3)
       {:ok, [
-      %Moeda{casas_decimais: 2, centavos: 334, codigo_moeda: :USD, simbolo: "$"},
-      %Moeda{casas_decimais: 2, centavos: 333, codigo_moeda: :USD, simbolo: "$"},
-      %Moeda{casas_decimais: 2, centavos: 333, codigo_moeda: :USD, simbolo: "$"}
+      %ElixirMoeda{casas_decimais: 2, centavos: 334, codigo_moeda: :USD, simbolo: "$"},
+      %ElixirMoeda{casas_decimais: 2, centavos: 333, codigo_moeda: :USD, simbolo: "$"},
+      %ElixirMoeda{casas_decimais: 2, centavos: 333, codigo_moeda: :USD, simbolo: "$"}
       ]}
 
-      iex> Moeda.split(Moeda.novo!(1000, :USD), 4)
+      iex> ElixirMoeda.split(ElixirMoeda.novo!(1000, :USD), 4)
       {:ok, [
-      %Moeda{casas_decimais: 2, centavos: 250, codigo_moeda: :USD, simbolo: "$"},
-      %Moeda{casas_decimais: 2, centavos: 250, codigo_moeda: :USD, simbolo: "$"},
-      %Moeda{casas_decimais: 2, centavos: 250, codigo_moeda: :USD, simbolo: "$"},
-      %Moeda{casas_decimais: 2, centavos: 250, codigo_moeda: :USD, simbolo: "$"}
+      %ElixirMoeda{casas_decimais: 2, centavos: 250, codigo_moeda: :USD, simbolo: "$"},
+      %ElixirMoeda{casas_decimais: 2, centavos: 250, codigo_moeda: :USD, simbolo: "$"},
+      %ElixirMoeda{casas_decimais: 2, centavos: 250, codigo_moeda: :USD, simbolo: "$"},
+      %ElixirMoeda{casas_decimais: 2, centavos: 250, codigo_moeda: :USD, simbolo: "$"}
       ]}
 
   """
-  def split(%Moeda{centavos: total_centavos, codigo_moeda: codigo_moeda}, qtd_partes)
+  def split(%ElixirMoeda{centavos: total_centavos, codigo_moeda: codigo_moeda}, qtd_partes)
       when is_integer(qtd_partes) and qtd_partes > 0 do
     quociente = div(total_centavos, qtd_partes)
     resto = rem(total_centavos, qtd_partes)
 
     {:ok,
     Enum.map(1..qtd_partes, fn index ->
-      Moeda.novo!(quociente + if(index <= resto, do: 1, else: 0), codigo_moeda)
+      ElixirMoeda.novo!(quociente + if(index <= resto, do: 1, else: 0), codigo_moeda)
     end)}
   end
 end

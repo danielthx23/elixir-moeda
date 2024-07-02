@@ -91,10 +91,10 @@ Retorna a estrutura completa da moeda se encontrada no mapa, ou `nil` caso contr
 
 ## Exemplo
 
-      iex> Moeda.Taxas.get_moeda(:USD)
+      iex> ElixirMoeda.Taxas.get_moeda(:USD)
       %{taxa: 1.0, simbolo: "$", casas_decimais: 2}
 
-      iex> Moeda.Taxas.get_moeda("XYZ")
+      iex> ElixirMoeda.Taxas.get_moeda("XYZ")
       nil
 """
 def get_moeda(moeda) do
@@ -117,10 +117,10 @@ Retorna a taxa de câmbio da moeda se encontrada no mapa, ou `nil` caso contrár
 
 ## Exemplo
 
-      iex> Moeda.Taxas.get_taxa(:USD)
+      iex> ElixirMoeda.Taxas.get_taxa(:USD)
       1.0
 
-      iex> Moeda.Taxas.get_taxa(:XYZ)
+      iex> ElixirMoeda.Taxas.get_taxa(:XYZ)
       nil
 """
 def get_taxa(moeda) do
@@ -143,10 +143,10 @@ Retorna o símbolo da moeda se encontrado no mapa, ou `nil` caso contrário.
 
 ## Exemplo
 
-      iex> Moeda.Taxas.get_simbolo(:USD)
+      iex> ElixirMoeda.Taxas.get_simbolo(:USD)
       "$"
 
-      iex> Moeda.Taxas.get_simbolo(:XYZ)
+      iex> ElixirMoeda.Taxas.get_simbolo(:XYZ)
       nil
 """
 def get_simbolo(moeda) do
@@ -169,10 +169,10 @@ Retorna o número de casas decimais da moeda se encontrado no mapa, ou `nil` cas
 
 ## Exemplo
 
-      iex> Moeda.Taxas.get_casas(:USD)
+      iex> ElixirMoeda.Taxas.get_casas(:USD)
       2
 
-      iex> Moeda.Taxas.get_casas(:XYZ)
+      iex> ElixirMoeda.Taxas.get_casas(:XYZ)
       nil
 """
 def get_casas(moeda) do
