@@ -41,10 +41,10 @@ Para começar a usar o projeto, siga estas etapas:
       ```
       
 ## Lançamentos Principais
-- **Versão 1.0 (01/07):** Implementação das funções básicas de operações financeiras.
-- **Versão 1.1 (01/07):** Adição de funcionalidades avançadas como conversão de moeda e operações de split.
-- **Versão 1.2 (01/07):** Adição de testes unitários e documentação.  
-- **Versão 1.3 (01/07):** Adição de testes mais especificos e README.md.
+- **Versão 1.1.1 (01/07):** Implementação das funções básicas de operações financeiras.
+- **Versão 1.2.1 (01/07):** Adição de funcionalidades avançadas como conversão de moeda e operações de split.
+- **Versão 1.3.1 (01/07):** Adição de testes unitários e documentação.  
+- **Versão 1.4.1 (01/07):** Adição de testes mais especificos e README.md.
 
 - **Próximos Lançamentos:** 
 Planejamento para otimização de desempenho, adição de novas funcionalidades e testes de cobertura.
