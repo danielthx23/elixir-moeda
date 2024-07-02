@@ -10,7 +10,7 @@ by adding `elixir_moeda` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:elixir_moeda, "~> 0.1.0"}
+    {:elixir_moeda, "~> 1.4.1"}
   ]
 end
 ```
